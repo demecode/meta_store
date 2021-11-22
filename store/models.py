@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Each product will have a name, price, optional description, optional image and availability
@@ -16,6 +17,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('store:product_list_by_category', args=[self.slug])
 
 
 class Product(models.Model):
@@ -40,3 +44,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    # We use get_absolute_url to retrieve a product object
+    def get_absolute_url(self):
+        return reverse('store:product_detail', args=[self.id, self.slug])
