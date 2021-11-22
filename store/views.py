@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_list_or_404
 from .models import Category, Product
 
-""" Display the Product Categories """
+""" Display the Product Catalog """
 
 
 def product_list(request, category_slug=None):
