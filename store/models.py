@@ -19,7 +19,8 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('store:product_list_by_category', args=[self.slug])
+        return reverse('store:product_list_by_category',
+                       args=[self.slug])
 
 
 class Product(models.Model):
@@ -28,7 +29,7 @@ class Product(models.Model):
                                  on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=180, db_index=True)
-    image = models.ImageField(upload_to='products/%/%m%d',
+    image = models.ImageField(upload_to='products/%Y/%m/%d',
                               blank=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10,
@@ -47,4 +48,5 @@ class Product(models.Model):
 
     # We use get_absolute_url to retrieve a product object
     def get_absolute_url(self):
-        return reverse('store:product_detail', args=[self.id, self.slug])
+        return reverse('store:product_detail',
+                       args=[self.id, self.slug])

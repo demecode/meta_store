@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 
 """ Display the Product Catalog """
@@ -12,7 +12,7 @@ def product_list(request, category_slug=None):
     # if category slug exists
     if category_slug:
         # category is assigned the list of all categories
-        category = get_list_or_404(Category, slug=category_slug)
+        category = get_object_or_404(Category, slug=category_slug)
         # return optional products by a product filter
         products = products.filter(category=category)
     return render(request, 'store/product/list.html',
@@ -26,7 +26,7 @@ def product_list(request, category_slug=None):
 
 def product_detail(request, id, slug):
     # product takes a id & slug (must be available)
-    product = get_list_or_404(Product,
+    product = get_object_or_404(Product,
                               id=id,
                               slug=slug,
                               available=True)
